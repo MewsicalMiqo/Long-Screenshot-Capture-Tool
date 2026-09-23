@@ -1,0 +1,57 @@
+﻿<Window x:Class="MiqoOCR.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MiqoOCR"
+        mc:Ignorable="d"
+        Title="Long Screenshot Capture Tool" Height="900" Width="900" MinWidth="900" MinHeight="700">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Margin="0,14,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="WindowSelector" Width="300" Margin="0,0,8,0" DisplayMemberPath="Title" SelectedValuePath="Handle" SelectionChanged="WindowSelector_SelectionChanged" />
+            <Button Grid.Column="1" Width="80" Margin="0,0,14,0" Content="Refresh" Click="RefreshWindowsButton_Click" />
+            <Button x:Name="CaptureFrameButton" Grid.Column="3" Width="110" Height="38" Content="Capture frame" Click="CaptureFrameButton_Click" />
+            <Button x:Name="SavePreviewButton" Grid.Column="4" Width="110" Height="38" Margin="8,0,0,0" Content="Save preview" Click="SavePreviewButton_Click" IsEnabled="False" />
+            <Button Grid.Column="5" Width="90" Height="38" Margin="8,0,0,0" Content="Start over" Click="StartOverButton_Click" />
+            <Button x:Name="UndoButton" Grid.Column="6" Width="75" Height="38" Margin="8,0,0,0" Content="Undo" Click="UndoButton_Click" IsEnabled="False" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="StatusText" Text="Select a window, then press Start." Foreground="SlateGray" />
+            <ScrollViewer x:Name="PreviewScrollViewer" Grid.Row="1" Margin="0,8,0,8" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image x:Name="CompositeImage" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Canvas x:Name="SelectionCanvas"
+                            Width="{Binding ActualWidth, ElementName=CompositeImage}"
+                            Height="{Binding ActualHeight, ElementName=CompositeImage}"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Background="Transparent" IsHitTestVisible="False"
+                            MouseLeftButtonDown="SelectionCanvas_MouseLeftButtonDown"
+                            MouseMove="SelectionCanvas_MouseMove"
+                            MouseLeftButtonUp="SelectionCanvas_MouseLeftButtonUp">
+                        <Rectangle x:Name="SelectionRectangle" Stroke="DodgerBlue" StrokeThickness="2"
+                                   Fill="#403399FF" Visibility="Collapsed" />
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
