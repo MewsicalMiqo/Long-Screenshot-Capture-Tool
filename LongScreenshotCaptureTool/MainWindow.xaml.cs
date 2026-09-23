@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -11,7 +11,7 @@ using WpfPoint = System.Windows.Point;
 using MessageBox = System.Windows.MessageBox;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
-namespace MiqoOCR
+namespace LongScreenshotCaptureTool
 {
 public partial class MainWindow : Window
 {

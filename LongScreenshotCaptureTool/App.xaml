@@ -1,7 +1,7 @@
-﻿<Application x:Class="MiqoOCR.App"
+﻿<Application x:Class="LongScreenshotCaptureTool.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MiqoOCR"
+             xmlns:local="clr-namespace:LongScreenshotCaptureTool"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

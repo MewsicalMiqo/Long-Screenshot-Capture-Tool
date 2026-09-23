@@ -1,9 +1,9 @@
-﻿<Window x:Class="MiqoOCR.MainWindow"
+﻿<Window x:Class="LongScreenshotCaptureTool.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MiqoOCR"
+        xmlns:local="clr-namespace:LongScreenshotCaptureTool"
         mc:Ignorable="d"
         Title="Long Screenshot Capture Tool" Height="900" Width="900" MinWidth="900" MinHeight="700" SizeChanged="OnWindowSizeChanged">
     <Grid Margin="16">

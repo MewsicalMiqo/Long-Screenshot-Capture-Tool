@@ -1,4 +1,4 @@
-﻿namespace MiqoOCR
+﻿namespace LongScreenshotCaptureTool
 {
     /// <summary>
     /// Interaction logic for App.xaml
