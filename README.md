@@ -1,0 +1,1 @@
+# Long Screenshot Capture Tool
