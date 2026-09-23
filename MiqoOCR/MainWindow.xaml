@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiqoOCR"
         mc:Ignorable="d"
-        Title="Long Screenshot Capture Tool" Height="900" Width="900" MinWidth="900" MinHeight="700">
+        Title="Long Screenshot Capture Tool" Height="900" Width="900" MinWidth="900" MinHeight="700" SizeChanged="OnWindowSizeChanged">
     <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Margin="0,14,0,12">
+        <Grid Grid.Row="0" Margin="0,14,0,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -29,17 +28,23 @@
             <Button Grid.Column="5" Width="90" Height="38" Margin="8,0,0,0" Content="Start over" Click="StartOverButton_Click" />
             <Button x:Name="UndoButton" Grid.Column="6" Width="75" Height="38" Margin="8,0,0,0" Content="Undo" Click="UndoButton_Click" IsEnabled="False" />
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock x:Name="StatusText" Text="Select a window, then press Start." Foreground="SlateGray" />
-            <ScrollViewer x:Name="PreviewScrollViewer" Grid.Row="1" Margin="0,8,0,8" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Image x:Name="CompositeImage" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <Canvas x:Name="SelectionCanvas"
+            <ScrollViewer x:Name="PreviewScrollViewer" Grid.Row="1" Margin="0,8,0,8" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <!-- Panning is handled on this content grid (not the ScrollViewer) so the scrollbar stays fully usable. -->
+                <Grid x:Name="PreviewContentGrid" HorizontalAlignment="Left" VerticalAlignment="Top"
+                      MouseLeftButtonDown="PreviewContent_MouseLeftButtonDown"
+                      MouseMove="PreviewContent_MouseMove"
+                      MouseLeftButtonUp="PreviewContent_MouseLeftButtonUp">
+                    <!-- Scales with the window; in "fit" mode (first frame) it shrinks to fit fully, no scrollbars. -->
+                    <Image x:Name="CompositeImage" Stretch="Uniform"
+                           MaxWidth="{Binding ViewportWidth, ElementName=PreviewScrollViewer}"
+                           HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Canvas x:Name="SelectionCanvas" Cursor="Cross"
                             Width="{Binding ActualWidth, ElementName=CompositeImage}"
                             Height="{Binding ActualHeight, ElementName=CompositeImage}"
                             HorizontalAlignment="Left" VerticalAlignment="Top"
